@@ -41,33 +41,39 @@ for f in filelist:
             docWords.append(word)
     docCount.update(docWords)
 
+# Open output file
+out = open('output.txt', "w")
+
 # Number of Vlog documents
 numDocs = len(filelist)
 
-# Print word count for all words
+# Print word count for each word
 #for item in wordcount.items(): print("{}\t{}".format(*item))
 
 # Total number of words across all documents
 totalWordCount = sum(wordcount.values())
-print('Total Word Count: {}'.format(totalWordCount))
+#print('Total Word Count: {}'.format(totalWordCount))
+out.write('Total Word Count: {}\n'.format(totalWordCount))
 
 # Average number of words per document, rounded to nearest integer
 avgWords = round(sum(wordcount.values())/numDocs)
-print('Average Word Count Per Document: {}'.format(avgWords))
+#print('Average Word Count Per Document: {}'.format(avgWords))
+out.write('Average Word Count Per Document: {}\n'.format(avgWords))
 
 # Print 30 most common words and their counts
 #print(wordcount.most_common(30))
 
 # Number of unique words across all documents
 uniqueWords = len(wordcount)
-print('Number of Unique Words: {}'.format(uniqueWords))
+#print('Number of Unique Words: {}'.format(uniqueWords))
+out.write('Number of Unique Words: {}\n'.format(uniqueWords))
 
 # 30 most frequently used words and their counts (TF)
 top30 = wordcount.most_common(30)
 #print(top30)
 
 # Calculate IDF, TF*IDF, probability for top 30 words
-for i in range(len(top30)-1):
+for i in range(len(top30)):
     tempWord = top30[i][0]
     tempCount = top30[i][1]
     tempDocCount = docCount[tempWord]
@@ -82,14 +88,23 @@ for key in wordcount:
     if wordcount[key] == 1:
         occurOnce+=1
         
-print('Number of Words That Occur only Once: {}'.format(occurOnce))
+#print('Number of Words That Occur only Once: {}'.format(occurOnce))
+out.write('Number of Words That Occur only Once: {}\n'.format(occurOnce))
 
 # Print TF, IDF, TF*IDF, Probabilities of top 30 words
-print('30 Most Frequent Words')
-print('Word\tTF\tIDF\tTF*IDF\tProbability')
+out.write('30 Most Frequest Words\n')
+out.write('Word\tTF\tIDF\tTF*IDF\tProbability\n')
 for key in top30TF:
-    print('{}:\t{}\t{}\t{}\t{}'.format(key, top30TF[key], round(top30IDF[key], 4), 
+    out.write('{}:\t{}\t{}\t{}\t{}\n'.format(key, top30TF[key], round(top30IDF[key], 4), 
           round(top30TFIDF[key], 2), round(top30Prob[key], 4)))
+
+#print('30 Most Frequent Words')
+#print('Word\tTF\tIDF\tTF*IDF\tProbability')
+#for key in top30TF:
+#    print('{}:\t{}\t{}\t{}\t{}'.format(key, top30TF[key], round(top30IDF[key], 4), 
+#          round(top30TFIDF[key], 2), round(top30Prob[key], 4)))
+
+out.close()
     
 
     
