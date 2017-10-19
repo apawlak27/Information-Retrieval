@@ -1,8 +1,8 @@
 Total Word Count: 236566
-Average Word Count Per Document: 586
 Number of Unique Words: 10774
 Number of Words That Occur only Once: 4682
-30 Most Frequest Words
+Average Word Count Per Document: 586
+30 Most Frequent Words:
 Word	TF	IDF	TF*IDF	Probability
 i:	9870	0.0032	31.95	0.0417
 and:	7959	0.0032	25.76	0.0336
